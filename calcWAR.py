@@ -1,3 +1,4 @@
+from scipy import stats
 import numpy as np
 import requests
 import util
@@ -10,7 +11,7 @@ from statistics import mean, median, stdev
 def war_wrapper(maps, api_key, url):
     user_ids = {}
     for map in maps:
-        map_war(map, api_key, url, user_ids)
+        map_war(map, user_ids)
     # swap to username
     results = {}
     for user in user_ids:
@@ -26,33 +27,35 @@ def war_wrapper(maps, api_key, url):
 # This map calculates the WAR and adds the
 # players' scores to the results dictionary.
 
-def map_war(map, api_key, url, results):
+def map_war(map, results):
     scores = map["scores"]
-    scoresArr = []
-    team1 = 0
-    team2 = 0
-    for score in scores:
-        scoresArr.append(int(score["score"]))
-        if score["team"] == '1':
-            team1 += int(score["score"])
-        else:
-            team2 += int(score["score"])
     
-    cutoff = np.percentile(scoresArr, 25)
 
-    # alternative cutoff formats
-    # cutoff = mean(scoresArr) - stdev(scoresArr)
-    # cutoff = mean(scoresArr)
-    # cutoff = median(scoresArr)
-    if team1 > team2:
-        winner = 1
-    else:
-        winner = 2
-    diff = abs(team1 - team2)
-    for score in scores:
-        if score["user_id"] not in results:
-            results[score["user_id"]] = 0
-        scoreComp = int(score["score"]) - cutoff
-        if scoreComp > diff or (-1 * scoreComp) > diff:
-            results[score["user_id"]] += scoreComp
+    # scoresArr = []
+    # team1 = 0
+    # team2 = 0
+    # for score in scores:
+    #     scoresArr.append(int(score["score"]))
+    #     if score["team"] == '1':
+    #         team1 += int(score["score"])
+    #     else:
+    #         team2 += int(score["score"])
+    
+    # cutoff = np.percentile(scoresArr, 25)
+
+    # # alternative cutoff formats
+    # # cutoff = mean(scoresArr) - stdev(scoresArr)
+    # # cutoff = mean(scoresArr)
+    # # cutoff = median(scoresArr)
+    # if team1 > team2:
+    #     winner = 1
+    # else:
+    #     winner = 2
+    # diff = abs(team1 - team2)
+    # for score in scores:
+    #     if score["user_id"] not in results:
+    #         results[score["user_id"]] = 0
+    #     scoreComp = int(score["score"]) - cutoff
+    #     if scoreComp > diff or (-1 * scoreComp) > diff:
+    #         results[score["user_id"]] += scoreComp
     return results
