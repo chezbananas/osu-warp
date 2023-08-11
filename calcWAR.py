@@ -1,4 +1,3 @@
-from scipy import stats
 from numpy.random import normal
 import util
 from statistics import mean, median, stdev

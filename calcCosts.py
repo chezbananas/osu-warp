@@ -3,7 +3,6 @@
 # your team won, while giving 0% for maps you lost or didn't play.
 # A little too results-oriented to provide meaningful results.
 import util
-import requests
 from statistics import mean
 
 def parseMaps(maps):
