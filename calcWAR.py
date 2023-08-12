@@ -33,6 +33,8 @@ def war_wrapper(maps, api_key, url):
 # results and playcount dictionary.
 def map_war(map, results, playcount, blue):
     scores = map["scores"]
+    if len(scores) == 0:
+        return
     scoresArr = []
     for score in scores:
         scoresArr.append(int(score["score"]))
@@ -54,4 +56,4 @@ def map_war(map, results, playcount, blue):
         results[id] += w
         playcount[id] += 1
         if score["team"] == '1':
-            blue.add(score[id])
+            blue.add(id)

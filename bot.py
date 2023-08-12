@@ -29,8 +29,8 @@ async def on_ready():
 # Rank command
 @bot.slash_command(description="Gets a player's osu! rank")
 async def rank(inter, user: str):
-    rank = getUser.get_rank(OSU_KEY, user, API_URL)
-    properUser = getUser.user_from_id(OSU_KEY, user, API_URL)
+    rank = util.get_rank(OSU_KEY, user, API_URL)
+    properUser = util.user_from_id(OSU_KEY, user, API_URL)
     await inter.response.send_message(properUser + " is rank " + rank + "!")
 
 # Strict RWS Calculation
