@@ -1,5 +1,9 @@
 # osu-warp
-Small discord bot to estimate wins above replacement for osu! tournament matches, written to learn more about disnake and coding Discord Bots.
+Discord bot that implements Monte Carlo sampling to estimate wins above replacement for osu! Tournament Matches.
 
-To run, import disnake if you haven't already, and create a .env file containing your Discord bot token ('DISCORD_TOKEN') and osu! API keys ('OSU_API_KEY').
-Additionally, modify the testing_guild parameter to include your own server's ID, or comment out the line entirely.
+To run, create a file titled ".env", and add the following lines:
+```
+DISCORD_TOKEN=(Your Bot's Token)
+OSU_API_KEY=(Your osu! API key)
+```
+Then, simply run `bot.py`.

@@ -55,3 +55,18 @@ def user_from_id(key, id, url):
     response = response[0]
     username = response["username"]
     return username
+
+# This helper function takes in a user ID and API key/url, and 
+# returns their username as a string.
+def id_from_user(key, username, url):
+    parameters = {
+        "k": key,
+        "u": username
+    }
+    response = requests.get(url + "get_user", params=parameters)
+    response = response.json()
+    if not response:
+        return "Invalid User"
+    response = response[0]
+    id = response["user_id"]
+    return id
